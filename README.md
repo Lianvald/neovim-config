@@ -1,2 +1,3 @@
 # neovim-config
-neovim with nvchad setup 
+
+setup is used for Lazyvim
