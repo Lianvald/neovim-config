@@ -30,10 +30,10 @@ return {
       opts.format_on_save = opts.format_on_save or {}
       opts.formatters_by_ft.cs = { "csharpier" }
       opts.formatters_by_ft.csproj = { "csharpier" }
-      opts.format_on_save = {
-        lsp_fallback = false,
-        timeout_ms = 2000,
-      }
+      -- opts.format_on_save = {
+      --  lsp_fallback = false,
+      --  timeout_ms = 2000,
+      --}
     end,
   },
   {
@@ -59,6 +59,18 @@ return {
           },
           ["csharp|code_lens"] = {
             dotnet_enable_references_code_lens = true,
+          },
+          ["csharp|background_analysis"] = {
+            dotnet_analyzer_diagnostics_scope = "fullSolution",
+            dotnet_compiler_diagnostics_scope = "fullSolution",
+          },
+          ["csharp|completion"] = {
+            dotnet_show_completion_items_from_unimported_namespaces = true,
+            dotnet_provide_regex_completions = true,
+            dotnet_show_name_completion_suggestions = true,
+          },
+          ["csharp|symbol_search"] = {
+            dotnet_search_reference_assemblies = true,
           },
         },
       })
