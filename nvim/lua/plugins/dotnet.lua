@@ -41,6 +41,28 @@ return {
     ft = { "cs", "razor" },
     lazy = false,
     config = function()
+      require("roslyn").setup({
+        opts = {
+          filewatching = "roslyn",
+          broad_search = true,
+          lock_target = true,
+          choose_target = function(targets)
+            -- Prefer .slnx, then .sln
+            for _, t in ipairs(targets) do
+              if t:match("%.slnx$") then
+                return t
+              end
+            end
+            for _, t in ipairs(targets) do
+              if t:match("%.sln$") then
+                return t
+              end
+            end
+            return targets[1]
+          end,
+        },
+      })
+
       vim.lsp.config("roslyn", {
         settings = {
           ["csharp|inlay_hints"] = {
@@ -59,6 +81,7 @@ return {
           },
           ["csharp|code_lens"] = {
             dotnet_enable_references_code_lens = true,
+            dotnet_enable_tests_code_lens = true,
           },
           ["csharp|background_analysis"] = {
             dotnet_analyzer_diagnostics_scope = "fullSolution",
