@@ -44,7 +44,7 @@ return {
       require("roslyn").setup({
         opts = {
           filewatching = "roslyn",
-          broad_search = true,
+          broad_search = false,
           lock_target = true,
           choose_target = function(targets)
             -- Prefer .slnx, then .sln
@@ -84,8 +84,8 @@ return {
             dotnet_enable_tests_code_lens = true,
           },
           ["csharp|background_analysis"] = {
-            dotnet_analyzer_diagnostics_scope = "fullSolution",
-            dotnet_compiler_diagnostics_scope = "fullSolution",
+            dotnet_analyzer_diagnostics_scope = "openFiles",
+            dotnet_compiler_diagnostics_scope = "openFiles",
           },
           ["csharp|completion"] = {
             dotnet_show_completion_items_from_unimported_namespaces = true,
